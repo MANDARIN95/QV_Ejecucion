@@ -72,7 +72,7 @@ namespace QV_Clases
             MostrarResultado(dist, inicio);
         }
 
-            private int MinDistancia(int[] dist, bool[] visitado)
+            public int MinDistancia(int[] dist, bool[] visitado)
             {
                 int min = 9999;
                 int idx = -1;
@@ -89,7 +89,7 @@ namespace QV_Clases
                 return idx;
             }
 
-            private void MostrarResultado(int[] dist, int inicio)
+            public void MostrarResultado(int[] dist, int inicio)
             {
                 Console.WriteLine("\nDistancias desde " + Vertices[inicio].Dato + ":");
                 for (int i = 0; i < CantidadQV_Vertices; i++)
