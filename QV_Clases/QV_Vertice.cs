@@ -9,12 +9,16 @@ namespace QV_Clases
     public class QV_Vertice
     {
         public string Dato;
-        public int  Indice;
+        public bool visitado;
+        public int  Distancia;
+        public QV_Vertice Anterior;
 
-        public QV_Vertice(string dato, int indice)
+        public QV_Vertice(string dato)
         {
            Dato = dato;
-           Indice = indice;
+            Visitado = flase;
+            Distancia = int.MaxValue;
+            Anterior= null;
         }
     }
 }
