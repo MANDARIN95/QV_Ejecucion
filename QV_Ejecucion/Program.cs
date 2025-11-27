@@ -1,9 +1,10 @@
-﻿using QV_Clases;
+using QV_Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static QV_Clases.QV_Grafo;
 
 namespace QV_Ejecucion
 {
@@ -11,27 +12,25 @@ namespace QV_Ejecucion
     {
         public static void Main(string[] args)
         {
-           QV_Grafo grafo  = new QV_Grafo(5);
+                Grafo g = new Grafo();
 
-            grafo.AgregarVertice(0, "A");
-            grafo.AgregarVertice(1, "B");
-            grafo.AgregarVertice(2, "C");
-            grafo.AgregarVertice(3, "D");
-            grafo.AgregarVertice(4, "E");
+                QV_Vertice A = g.AgregarVertice("A");
+                QV_Vertice B = g.AgregarVertice("B");
+                QV_Vertice C = g.AgregarVertice("C");
+                QV_Vertice D = g.AgregarVertice("D");
 
-            grafo.AgregarArista(0, 1, 4);
-            grafo.AgregarArista(0, 2, 2);
-            grafo.AgregarArista(1, 2, 3);
-            grafo.AgregarArista(1, 3, 2);
-            grafo.AgregarArista(2, 3, 4);
-            grafo.AgregarArista(3, 4, 1);
+                g.AgregarArista(A, C, 2);
+                g.AgregarArista(C, B, 3);
+                g.AgregarArista(C, D, 6);
 
-            Console.WriteLine("Dijkstra desde A:");
-            grafo.Dijkstra(0);
+                g.Dijkstra(A);
+                g.MostrarRutas();
 
-            Console.ReadLine();
+                Console.ReadLine();
+            
         }
-    }
 
+    }
 }
+
 
