@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +9,22 @@ namespace QV_Clases
     public class QV_Vertice
     {
         public string Dato;
-        public bool visitado;
+        public QV_ListaEnlazadaSimple ListaAristas;
+
+
+        public bool Visitado;
         public int  Distancia;
         public QV_Vertice Anterior;
 
         public QV_Vertice(string dato)
         {
            Dato = dato;
-            Visitado = flase;
-            Distancia = int.MaxValue;
-            Anterior= null;
+           ListaAristas = new QV_ListaEnlazadaSimple();
+
+            Visitado = false;
+            Distancia = int .MaxValue;
+            Anterior = null;
         }
+        public QV_Vertice siguiente;
     }
 }
