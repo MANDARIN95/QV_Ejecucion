@@ -1,4 +1,5 @@
-﻿using System;
+using QV_Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,40 +9,42 @@ namespace QV_Clases
 {
     public class QV_ListaEnlazadaSimple
     {
-        private NodoLista cabeza; 
+            public NodoLista Cabeza;
 
-        public QV_ListaEnlazadaSimple()
-        {
-            cabeza = null;
-        }
-
-        public void Agregar(QV_Arista a)
-        {
-            NodoLista nuevo = new NodoLista(a);
-
-            if (cabeza == null)
+            public QV_ListaEnlazadaSimple()
             {
-                cabeza = nuevo;
+                Cabeza = null;
             }
-            else
+
+            public void Agregar(QV_Arista a)
             {
-                NodoLista temp = cabeza;
-                while (temp.Siguiente != null)
+                NodoLista nuevo = new NodoLista(a);
+
+                if (Cabeza == null)
                 {
-                    temp = temp.Siguiente;
+                    Cabeza = nuevo;
                 }
-                temp.Siguiente = nuevo;
+                else
+                {
+                    NodoLista temp = Cabeza;
+                    while (temp.Siguiente != null)
+                    {
+                        temp = temp.Siguiente;
+                    }
+                    temp.Siguiente = nuevo;
+                }
             }
-        }
-        public class NodoLista
-        {
+    }
+
+    public class NodoLista
+    {
             public QV_Arista Dato;
             public NodoLista Siguiente;
-            public NodoLista(QV_Arista dato)
+            public NodoLista(QV_Arista a)
             {
-                Dato = dato;
+                Dato = a;
                 Siguiente = null;
             }
-        }
+        
     }
 }
