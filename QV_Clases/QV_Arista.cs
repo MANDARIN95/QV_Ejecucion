@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +8,16 @@ namespace QV_Clases
 {
     public class QV_Arista
     {
-        public int Origen;
-        public int Destino;
-        public int Peso;
+       public QV_Vertice Destino;
+       public int Peso;
+        public int Cabeza;
+       public QV_Arista Siguiente;
 
-        public QV_Arista(int origen, int destino, int peso)
-        {
-            Origen = origen;
-            Destino = destino;
-            Peso = peso;
-        }
+      public QV_Arista(QV_Vertice destino, int peso)
+      {
+         Destino = destino;
+         Peso = peso;
+         Siguiente = null;
+      }
     }
 }
