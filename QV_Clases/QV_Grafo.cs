@@ -1,106 +1,142 @@
-﻿using System;
+using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static QV_Clases.QV_ListaEnlazadaSimple;
 
 namespace QV_Clases
 {
     public class QV_Grafo
     {
-       public int[,] Matriz;
-       public QV_Vertice[] Vertices;
-       public int CantidadQV_Vertices;
+        public class Grafo
+        {
+            public QV_Vertice Cabeza;
 
-       public QV_Grafo(int cantidad)
-       {
-         CantidadQV_Vertices = cantidad;
-         Matriz = new int[cantidad, cantidad];
-         Vertices = new QV_Vertice[cantidad];
-
-            for (int i = 0; i < CantidadQV_Vertices; i++)
+            public Grafo()
             {
-                for (int j = 0; j < CantidadQV_Vertices; j++)
+                Cabeza = null;
+            }
+
+            public QV_Vertice AgregarVertice(string dato)
+            {
+                QV_Vertice nuevo = new QV_Vertice(dato);
+
+                if (Cabeza == null)
                 {
-                    Matriz[i, j] = 0;
+                    Cabeza = nuevo;
+                }
+                else
+                {
+                    QV_Vertice temp = Cabeza;
+                    while (temp.siguiente != null)
+                    {
+                        temp = temp.siguiente;
+                    }
+                    temp.siguiente = nuevo;
+                }
+
+                return nuevo;
+            }
+
+            public void AgregarArista(QV_Vertice origen, QV_Vertice destino, int peso)
+            {
+                QV_Arista nueva = new QV_Arista(destino, peso);
+                origen.ListaAristas.Agregar(nueva);
+            }
+
+           
+            private void InicializarDijkstra()
+            {
+                QV_Vertice v = Cabeza;
+                while (v != null)
+                {
+                    v.Visitado = false;
+                    v.Distancia = int.MaxValue;
+                    v.Anterior = null;
+                    v = v.siguiente;
                 }
             }
-       }
 
-        public void AgregarVertice(int indice, string dato)
-        {
-          Vertices[indice] = new QV_Vertice(dato, indice);
-        }
+            private QV_Vertice ObtenerVerticeMenor()
+            {
+                QV_Vertice temp = Cabeza;
+                QV_Vertice menor = null;
 
-        public void AgregarArista(int origen, int destino, int peso)
-        {
-           Matriz[origen, destino] = peso;
-           Matriz[destino, origen] = peso; 
-        }
-
-        public void Dijkstra(int inicio)
-        {
-                int[] dist = new int[CantidadQV_Vertices];
-                bool[] visitado = new bool[CantidadQV_Vertices];
-
-               
-                for (int i = 0; i < CantidadQV_Vertices; i++)
+                while (temp != null)
                 {
-                    dist[i] = 9999;
-                    visitado[i] = false;
-                }
-
-                dist[inicio] = 0;
-
-                for (int contador = 0; contador < CantidadQV_Vertices - 1; contador++)
-                {
-                    int u = MinDistancia(dist, visitado);
-                    visitado[u] = true;
-
-                    for (int v = 0; v < CantidadQV_Vertices; v++)
+                    if (!temp.Visitado)
                     {
-                        if (!visitado[v] &&
-                            Matriz[u, v] > 0 &&
-                            dist[u] != 9999 &&
-                            dist[u] + Matriz[u, v] < dist[v])
+                        if (menor == null || temp.Distancia < menor.Distancia)
                         {
-                            dist[v] = dist[u] + Matriz[u, v];
+                            menor = temp    ;
                         }
                     }
+                    temp = temp.siguiente;
                 }
-            MostrarResultado(dist, inicio);
-        }
 
-            public int MinDistancia(int[] dist, bool[] visitado)
+                return menor;
+            }
+
+            public void Dijkstra(QV_Vertice inicio)
             {
-                int min = 9999;
-                int idx = -1;
+                InicializarDijkstra();
+                inicio.Distancia = 0;
 
-                for (int i = 0; i < CantidadQV_Vertices; i++)
+                while (true)
                 {
-                    if (!visitado[i] && dist[i] <= min)
+                    QV_Vertice actual = ObtenerVerticeMenor();
+                    if (actual == null) break;
+
+                    actual.Visitado = true;
+
+                    NodoLista nodo = actual.ListaAristas.Cabeza;
+                    while (nodo != null)
                     {
-                        min = dist[i];
-                        idx = i;
+                    QV_Arista arista = nodo.Dato;
+
+                        int nuevo = actual.Distancia + arista.Peso;
+
+                        if (nuevo < arista.Destino.Distancia)
+                        {
+                            arista.Destino.Distancia = nuevo;
+                            arista.Destino.Anterior = actual;
+                        }
+
+                        nodo = nodo.Siguiente;
                     }
                 }
-
-                return idx;
             }
 
-            public void MostrarResultado(int[] dist, int inicio)
+            
+            public void MostrarRutas()
             {
-                Console.WriteLine("\nDistancias desde " + Vertices[inicio].Dato + ":");
-                for (int i = 0; i < CantidadQV_Vertices; i++)
+                QV_Vertice v = Cabeza;
+
+                while (v != null)
                 {
-                    Console.WriteLine(Vertices[inicio].Dato + " - " +
-                                      Vertices[i].Dato + " = " + dist[i]);
+                    Console.Write("Vertice " + v.Dato + " - Ruta: ");
+                    ImprimirRuta(v);
+                    Console.WriteLine(" (Costo: " + v.Distancia + ")");
+                    v = v.siguiente;
                 }
             }
-        
+
+            
+            private void ImprimirRuta(QV_Vertice v)
+            {
+                if (v.Anterior != null)
+                {
+                    ImprimirRuta(v.Anterior);
+                    Console.Write(" -> ");
+                }
+
+                Console.Write(v.Dato);
+            }
+        }
+
     }
 }
-   
-
 
