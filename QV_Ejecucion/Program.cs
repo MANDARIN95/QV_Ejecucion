@@ -12,25 +12,53 @@ namespace QV_Ejecucion
     {
         public static void Main(string[] args)
         {
-                Grafo g = new Grafo();
 
-                QV_Vertice A = g.AgregarVertice("A");
-                QV_Vertice B = g.AgregarVertice("B");
-                QV_Vertice C = g.AgregarVertice("C");
-                QV_Vertice D = g.AgregarVertice("D");
+            QV_Grafo g = new QV_Grafo();
 
-                g.AgregarArista(A, C, 2);
-                g.AgregarArista(C, B, 3);
-                g.AgregarArista(C, D, 6);
+            QV_Vertice A = g.AgregarVertice("A");
+            QV_Vertice B = g.AgregarVertice("B");
+            QV_Vertice C = g.AgregarVertice("C");
+            QV_Vertice D = g.AgregarVertice("D");
 
-                g.Dijkstra(A);
-                g.MostrarRutas();
+            g.AgregarArista(A, C, 2);
+            g.AgregarArista(C, B, 3);
+           g.AgregarArista(C, D, 6);
 
-                Console.ReadLine();
-            
+
+            g.Dijkstra(A);
+
+
+
+            Console.Write("Ingrese destino (A, B, C, D): ");
+            string destino = Console.ReadLine();
+
+            QV_Vertice vDestino = null;
+
+
+            if (destino == "A") vDestino = A;
+            if (destino == "B") vDestino = B;
+            if (destino == "C") vDestino = C;
+            if (destino == "D") vDestino = D;
+
+            if (vDestino != null)
+            {
+                g.MostrarRuta(vDestino);
+            }
+            else
+            {
+                Console.WriteLine("Destino no válido.");
+            }
+
+            Console.ReadLine();
+
         }
-
     }
 }
+
+
+
+
+   
+
 
 
