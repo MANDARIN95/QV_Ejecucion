@@ -9,42 +9,42 @@ namespace QV_Clases
 {
     public class QV_ListaEnlazadaSimple
     {
-            public NodoLista Cabeza;
+        public NodoLista Cabeza;
 
-            public QV_ListaEnlazadaSimple()
+        public QV_ListaEnlazadaSimple()
+        {
+           Cabeza = null;
+        }
+
+        public void Agregar(QV_Arista a)
+        {
+            NodoLista nuevo = new NodoLista(a);
+
+            if (Cabeza == null)
             {
-                Cabeza = null;
+               Cabeza = nuevo;
             }
-
-            public void Agregar(QV_Arista a)
+            else
             {
-                NodoLista nuevo = new NodoLista(a);
-
-                if (Cabeza == null)
+                NodoLista temp = Cabeza;
+                while (temp.Siguiente != null)
                 {
-                    Cabeza = nuevo;
+                    temp = temp.Siguiente;
                 }
-                else
-                {
-                    NodoLista temp = Cabeza;
-                    while (temp.Siguiente != null)
-                    {
-                        temp = temp.Siguiente;
-                    }
-                    temp.Siguiente = nuevo;
-                }
+                temp.Siguiente = nuevo;
             }
+        }
     }
 
     public class NodoLista
     {
-            public QV_Arista Dato;
-            public NodoLista Siguiente;
-            public NodoLista(QV_Arista a)
-            {
-                Dato = a;
-                Siguiente = null;
-            }
+       public QV_Arista Dato;
+       public NodoLista Siguiente;
+       public NodoLista(QV_Arista a)
+       {
+          Dato = a;
+          Siguiente = null;
+       }
         
     }
 }
