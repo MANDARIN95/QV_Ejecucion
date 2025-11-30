@@ -12,7 +12,6 @@ namespace QV_Ejecucion
     {
         public static void Main(string[] args)
         {
-
             QV_Grafo g = new QV_Grafo();
 
             QV_Vertice A = g.AgregarVertice("A");
@@ -22,19 +21,15 @@ namespace QV_Ejecucion
 
             g.AgregarArista(A, C, 2);
             g.AgregarArista(C, B, 3);
-           g.AgregarArista(C, D, 6);
-
+            g.AgregarArista(C, D, 6);
 
             g.Dijkstra(A);
-
-
+            g.MostrarMatrices();
 
             Console.Write("Ingrese destino (A, B, C, D): ");
             string destino = Console.ReadLine();
 
             QV_Vertice vDestino = null;
-
-
             if (destino == "A") vDestino = A;
             if (destino == "B") vDestino = B;
             if (destino == "C") vDestino = C;
@@ -42,17 +37,18 @@ namespace QV_Ejecucion
 
             if (vDestino != null)
             {
-                g.MostrarRuta(vDestino);
+               g.MostrarRuta(vDestino);
             }
             else
             {
-                Console.WriteLine("Destino no válido.");
+               Console.WriteLine("Destino no válido.");
             }
 
             Console.ReadLine();
-
+            
         }
     }
+
 }
 
 
