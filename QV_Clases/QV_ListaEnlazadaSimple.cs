@@ -13,7 +13,7 @@ namespace QV_Clases
 
         public QV_ListaEnlazadaSimple()
         {
-           Cabeza = null;
+            Cabeza = null;
         }
 
         public void Agregar(QV_Arista a)
@@ -22,7 +22,7 @@ namespace QV_Clases
 
             if (Cabeza == null)
             {
-               Cabeza = nuevo;
+                Cabeza = nuevo;
             }
             else
             {
@@ -38,13 +38,13 @@ namespace QV_Clases
 
     public class NodoLista
     {
-       public QV_Arista Dato;
-       public NodoLista Siguiente;
-       public NodoLista(QV_Arista a)
-       {
-          Dato = a;
-          Siguiente = null;
-       }
-        
+        public QV_Arista Dato;
+        public NodoLista Siguiente;
+
+        public NodoLista(QV_Arista a)
+        {
+            Dato = a;
+            Siguiente = null;
+        }
     }
 }
