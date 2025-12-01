@@ -8,16 +8,15 @@ namespace QV_Clases
 {
     public class QV_Arista
     {
-       public QV_Vertice Destino;
-       public int Peso;
-        public int Cabeza;
-       public QV_Arista Siguiente;
+        public QV_Vertice Destino;
+        public int Peso;
+        public QV_Arista Siguiente;
 
-      public QV_Arista(QV_Vertice destino, int peso)
-      {
-         Destino = destino;
-         Peso = peso;
-         Siguiente = null;
-      }
+        public QV_Arista(QV_Vertice destino, int peso)
+        {
+            Destino = destino;
+            Peso = peso;
+            Siguiente = null;
+        }
     }
 }
