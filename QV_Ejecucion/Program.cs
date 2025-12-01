@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static QV_Clases.QV_Grafo;
 
 namespace QV_Ejecucion
 {
@@ -14,41 +13,47 @@ namespace QV_Ejecucion
         {
             QV_Grafo g = new QV_Grafo();
 
-            QV_Vertice A = g.AgregarVertice("A");
-            QV_Vertice B = g.AgregarVertice("B");
-            QV_Vertice C = g.AgregarVertice("C");
-            QV_Vertice D = g.AgregarVertice("D");
+           
+            g.AgregarVertice("A");
+            g.AgregarVertice("B");
+            g.AgregarVertice("C");
+            g.AgregarVertice("D");
+            g.AgregarVertice("E");
+            g.AgregarVertice("F");
+            g.AgregarVertice("T");
+            g.AgregarVertice("I");
 
-            g.AgregarArista(A, C, 2);
-            g.AgregarArista(C, B, 3);
-            g.AgregarArista(C, D, 6);
+            
+            g.AgregarArista("A", "B", 1);
+            g.AgregarArista("A", "D", 1);
+            g.AgregarArista("B", "C", 1);
+            g.AgregarArista("B", "D", 7);
+            g.AgregarArista("B", "F", 6);
+            g.AgregarArista("C", "F", 10);
+            g.AgregarArista("C", "B", 1);
+            g.AgregarArista("D", "E", 2);
+            g.AgregarArista("D", "T", 18);
+            g.AgregarArista("E", "T", 9);
+            g.AgregarArista("F", "T", 2);
+            g.AgregarArista("I", "A", 9);
+            g.AgregarArista("I", "C", 2);
 
-            g.Dijkstra(A);
+            
             g.MostrarMatrices();
 
-            Console.Write("Ingrese destino (A, B, C, D): ");
-            string destino = Console.ReadLine();
+            Console.WriteLine("\n DIJKSTRA");
+            Console.Write("Ingrese origen: ");
+            string origen = Console.ReadLine().ToUpper();
+            Console.Write("Ingrese destino: ");
+            string destino = Console.ReadLine().ToUpper();
 
-            QV_Vertice vDestino = null;
-            if (destino == "A") vDestino = A;
-            if (destino == "B") vDestino = B;
-            if (destino == "C") vDestino = C;
-            if (destino == "D") vDestino = D;
-
-            if (vDestino != null)
-            {
-               g.MostrarRuta(vDestino);
-            }
-            else
-            {
-               Console.WriteLine("Destino no válido.");
-            }
-
-            Console.ReadLine();
             
+            g.Dijkstra(origen, destino);
+
+            Console.WriteLine("\nPresione una tecla para salir...");
+            Console.ReadKey();
         }
     }
-
 }
 
 
